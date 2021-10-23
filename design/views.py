@@ -42,4 +42,27 @@ def search(request):
         return render(request, 'search.html', {"title":title, "projs":searched})
     else:
         message = "You haven't searched for any term"
-        return render(request, 'search.html',{"message":message})    
+        return render(request, 'search.html',{"message":message})  
+
+def single(request, id):
+    current_prof = request.user.profile
+    try:
+        project = Project.objects.get(id=id)
+        ratings = Rating.objects.filter(project = id)
+        if Rating.objects.filter(owner = current_prof, project = id).first() is None:
+            if request.method == "POST":
+                form = RateForm(request.POST)
+                if form.is_valid():
+                    vote = form.save(commit=False)
+                    vote.owner = current_prof
+                    vote.project = id
+                    vote.save()
+                    return redirect('profile')
+                else:
+                    form = RateForm()            
+
+            
+
+    except ObjectDoesNotExist:
+        raise Http404()
+    return render(request,"project.html", {"project":project})    
