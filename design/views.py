@@ -18,7 +18,7 @@ def you(request):
 def profile(request, id):
     user = User.objects.get(id=id)
     projs= Project.objects.filter(owner = user.profile).all()
-    return render(request, "you.html", {"projs":projs, "user":user}) 
+    return render(request, "profile.html", {"projs":projs, "user":user}) 
 
 def new_proj(request):
     current_user = request.user.profile    
@@ -82,4 +82,4 @@ def update_profile(request):
         return redirect('profile')
     else:
         form = NewProjForm()
-    return render(request, 'new_proj.html', {"form": form})     
+    return render(request, 'prof_update.html', {"form": form})     
