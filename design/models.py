@@ -36,6 +36,12 @@ class Project(models.Model):
       def delete_project(self):
             '''Deletes project''' 
             self.delete() 
+      @classmethod
+      def searcher(cls, search_term):
+            search_term= str(search_term)
+            projs = cls.objects.filter(caption__contains = search_term)
+            return projs          
+
       def __str__(self):
             return f'Project {self.title}'               
 
