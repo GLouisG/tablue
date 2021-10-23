@@ -26,7 +26,12 @@ class Project(models.Model):
       description = models.TextField()
       link = models.TextField()
       owner = models.ForeignKey('Profile', on_delete=models.CASCADE)       
-           
+
       def save_project(self):
             '''Saves project'''
             self.save()
+      def delete_project(self):
+            '''Deletes project''' 
+            self.delete() 
+      def __str__(self):
+            return f'Project {self.title}'               
