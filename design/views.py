@@ -9,4 +9,8 @@ from django.db.models.base import ObjectDoesNotExist
 def home(request):
     projects = Project.objects.all()
     return render(request, "index.html", {"projs":projects,})
-    
+
+def you(request):
+    current_prof = request.user.profile
+    projs = Project.objects.filter(owner = current_prof).all()
+    return render(request, "you.html", {"projs":projs,}) 
