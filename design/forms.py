@@ -16,5 +16,5 @@ class RateForm(forms.ModelForm):
 class ProfUpdateForm(forms.ModelForm):
     class Meta:
           model = Profile
-          exclude = ['user']          
-#          fields = ('pic', 'bio', 'contacts')  
+         # exclude = ['user']          
+          fields = ('pic', 'bio', 'contacts')  

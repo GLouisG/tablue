@@ -66,3 +66,20 @@ def single(request, id):
     except ObjectDoesNotExist:
         raise Http404()
     return render(request,"project.html", {"project":project})    
+
+def update_profile(request):
+    current_profile = request.user.profile
+    if request.method == "POST":
+      form = NewProjForm(request.POST, request.FILES, instance=request.user.profile)
+      if form.is_valid():
+        image = form.cleaned_data['pic']
+        bio = form.cleaned_data['bio']
+        contacts = form.cleaned_data['contacts']
+        current_profile.bio = bio
+        current_profile.contacts = contacts
+        current_profile.pic = image
+        current_profile.save()
+        return redirect('profile')
+    else:
+        form = NewProjForm()
+    return render(request, 'new_proj.html', {"form": form})     
