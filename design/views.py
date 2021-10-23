@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.http.response import Http404
+from django.shortcuts import redirect, render
 
+from design.models import Project, Rating
+from design.forms import NewProjForm, RateForm
+from django.db.models.base import ObjectDoesNotExist
 # Create your views here.
-def home(request):
-    val = "Welcome"
-    return render(request, "index.html", {"val":val,})
