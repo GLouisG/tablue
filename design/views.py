@@ -14,3 +14,8 @@ def you(request):
     current_prof = request.user.profile
     projs = Project.objects.filter(owner = current_prof).all()
     return render(request, "you.html", {"projs":projs,}) 
+
+def profile(request, id):
+    user = User.objects.get(id=id)
+    projs= Project.objects.filter(owner = user.profile).all()
+    return render(request, "you.html", {"projs":projs, "user":user}) 
