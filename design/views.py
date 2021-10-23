@@ -19,3 +19,16 @@ def profile(request, id):
     user = User.objects.get(id=id)
     projs= Project.objects.filter(owner = user.profile).all()
     return render(request, "you.html", {"projs":projs, "user":user}) 
+
+def new_proj(request):
+    current_user = request.user.profile    
+    if request.method == "POST":
+      form = NewProjForm(request.POST, request.FILES)
+      if form.is_valid():
+        post = form.save(commit=False)
+        post.owner = current_user
+        post.save()
+        return redirect('profile')
+    else:
+        form = NewProjForm()
+    return render(request, 'new_proj.html', {"form": form})            
