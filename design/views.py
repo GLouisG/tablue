@@ -32,3 +32,14 @@ def new_proj(request):
     else:
         form = NewProjForm()
     return render(request, 'new_proj.html', {"form": form})            
+
+def search(request):
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get("project")
+        searched = Project.searcher(search_term)
+        title = f"For {search_term}"
+
+        return render(request, 'search.html', {"title":title, "projs":searched})
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})    
