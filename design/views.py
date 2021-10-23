@@ -49,6 +49,27 @@ def single(request, id):
     try:
         project = Project.objects.get(id=id)
         ratings = Rating.objects.filter(project = id)
+        design = []
+        usability = []
+        content = []
+
+        for r in ratings:
+            design.append(r.design)
+            usability.append(r.usability)
+            content.append(r.content)
+
+        if len(design)>0 or len(content)>0 or len(usability)>0:    
+            avg_design = sum(design)//len(design)
+            avg_usability = sum(usability)//len(usability)
+            avg_content = sum(content)//len(content)
+        else:    
+            avg_design = 0
+            avg_usability = 0
+            avg_content = 0
+
+
+
+
         if Rating.objects.filter(owner = current_prof, project = id).first() is None:
             if request.method == "POST":
                 form = RateForm(request.POST)
@@ -65,7 +86,7 @@ def single(request, id):
 
     except ObjectDoesNotExist:
         raise Http404()
-    return render(request,"project.html", {"project":project})    
+    return render(request,"project.html", {"project":project, "design": avg_design, "content": avg_content, "usability": avg_usability, "form":form, "ratings":ratings})    
 
 def update_profile(request):
     current_profile = request.user.profile
