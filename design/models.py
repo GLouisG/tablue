@@ -25,4 +25,8 @@ class Project(models.Model):
       picture = models.ImageField(upload_to='photos/', default='SOMETHING')
       description = models.TextField()
       link = models.TextField()
-      owner = models.ForeignKey('Profile', on_delete=models.CASCADE)            
+      owner = models.ForeignKey('Profile', on_delete=models.CASCADE)       
+           
+      def save_project(self):
+            '''Saves project'''
+            self.save()
