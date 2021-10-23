@@ -1,0 +1,147 @@
+{%extends 'base.html'%}
+
+{%block content%}{{block.super}}
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="prof-card card">
+      <div class="upper"> <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid"> </div>
+      <div class="user text-center">
+          <div class="profile"> <img src="https://i.imgur.com/JgYD2nQ.jpg" class="rounded-circle" width="80"> </div>
+      </div>
+      <div class="mt-5 text-center">
+          <h4 class="mb-0">{{user.username}}</h4>
+          <span class="text-muted d-block mb-2">{{user.profile.bio}}</span>
+          <span class="text-muted d-block mb-2">{{user.profile.contacts}}</span>
+          <div class="row">
+            <div class="col-md-6">
+              <a href="{%url update_profile%}">
+                <button class="btn btn-primary btn-sm update">Update Profile</button>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="{%url new_proj%}">
+                <button class="btn btn-primary btn-sm new">Create Project</button>
+              </a>
+            </div>
+          </div>
+          
+          <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+              <div class="stats">
+                  <h6 class="mb-0">Projects</h6> <span>{{user.profile.project.count}}</span>
+              </div>
+              
+          </div>
+      </div>
+  </div>
+
+
+
+  <div class="theprojects">
+    {%for item in projs%}
+    <div class="pcard card" style="width: 60%;">
+    
+      <div class="card-header" >
+        <div class="image-holder">
+          <img class="image" src="{{item.image.url}}" alt="">
+        </div>
+      </div>
+      <hr>
+    
+      <div class="card-body">
+        <h4>{{item.title}}</h4>
+        <hr>        
+        <p class="text-muted">{{item.owner}}</p>
+      </div>
+      <hr>
+      <br>
+    </div>
+    <br><br><br>
+    {%endfor%} 
+  </div>
+
+
+
+</div>
+{%endblock%}
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+body {
+    background-color: #545454;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300
+}
+
+.container {
+    height: 100vh
+}
+
+.prof-card{
+    width: 380px;
+    border: none;
+    border-radius: 15px;
+    padding: 8px;
+    background-color: #000080;
+    color: white;
+    position: relative;
+    height: 370px
+}
+
+.pcard{
+    width: 380px;   
+    background-color: #000080;
+    color: white;
+    height: 370px  
+
+}
+
+.upper {
+    height: 100px
+}
+
+.upper img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px
+}
+
+.user {
+    position: relative
+}
+
+.profile img {
+    height: 80px;
+    width: 80px;
+    margin-top: 2px
+}
+
+.profile {
+    position: absolute;
+    top: -50px;
+    left: 38%;
+    height: 90px;
+    width: 90px;
+    border: 3px solid #fff;
+    border-radius: 50%
+}
+
+.follow {
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 35px
+}
+
+.stats span {
+    font-size: 29px
+}
+.theprojects{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 100vw;
+    margin: 0 auto;
+    margin-left: 8%;
+
+}
+</style>
+
