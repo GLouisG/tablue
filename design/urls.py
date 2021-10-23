@@ -6,7 +6,7 @@ from django.conf import settings
 urlpatterns=[
     url('^$',views.home,name='home'),
     url(r'^new/post$', views.new_proj, name='new_proj'),
-
+    url(r'^profile/(\d+)', views.profile, name='profile'),
 
 
 ]
