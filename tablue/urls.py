@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from django.contrib.auth import views
+from django.urls import reverse_lazy
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'', include('design.urls')),
-    url(r'^accounts/', include('registration.backends.simple.urls')),    
+    url(r'^accounts/', include('registration.backends.simple.urls')),  
     url(r'^logout/$', views.LogoutView.as_view(), {"next_page": '/'})        
 ]

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.http.response import Http404
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 
 from design.models import Project, Rating
 from design.forms import NewProjForm, RateForm
@@ -10,16 +11,19 @@ def home(request):
     projects = Project.objects.all()
     return render(request, "index.html", {"projs":projects,})
 
+@login_required(login_url='/accounts/login/')
 def you(request):
     current_prof = request.user.profile
     projs = Project.objects.filter(owner = current_prof).all()
     return render(request, "you.html", {"projs":projs,}) 
 
+@login_required(login_url='/accounts/login/')
 def profile(request, id):
     user = User.objects.get(id=id)
     projs= Project.objects.filter(owner = user.profile).all()
     return render(request, "profile.html", {"projs":projs, "user":user}) 
 
+@login_required(login_url='/accounts/login/')
 def new_proj(request):
     current_user = request.user.profile    
     if request.method == "POST":
@@ -33,6 +37,7 @@ def new_proj(request):
         form = NewProjForm()
     return render(request, 'new_proj.html', {"form": form})            
 
+
 def search(request):
     if 'project' in request.GET and request.GET["project"]:
         search_term = request.GET.get("project")
@@ -44,6 +49,7 @@ def search(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})  
 
+@login_required(login_url='/accounts/login/')
 def single(request, id):
     current_prof = request.user.profile
     try:
@@ -88,6 +94,7 @@ def single(request, id):
         raise Http404()
     return render(request,"project.html", {"project":project, "design": avg_design, "content": avg_content, "usability": avg_usability, "form":form, "ratings":ratings})    
 
+@login_required(login_url='/accounts/login/')
 def update_profile(request):
     current_profile = request.user.profile
     if request.method == "POST":
