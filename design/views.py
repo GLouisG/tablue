@@ -15,7 +15,7 @@ def home(request):
 def you(request):
     current_prof = request.user.profile
     projs = Project.objects.filter(owner = current_prof).all()
-    return render(request, "you.html", {"projs":projs,}) 
+    return render(request, "you.html", {"projs":projs}) 
 
 @login_required(login_url='/accounts/login/')
 def profile(request, id):

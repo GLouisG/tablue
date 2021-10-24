@@ -5,7 +5,7 @@
   <div class="prof-card card">
       <div class="upper"> <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid"> </div>
       <div class="user text-center">
-          <div class="profile"> <img src="https://i.imgur.com/JgYD2nQ.jpg" class="rounded-circle" width="80"> </div>
+          <div class="profile"> <img src="{{user.profile.pic.url}}" class="rounded-circle" width="80"> </div>
       </div>
       <div class="mt-5 text-center">
           <h4 class="mb-0">{{user.username}}</h4>
@@ -13,12 +13,12 @@
           <span class="text-muted d-block mb-2">{{user.profile.contacts}}</span>
           <div class="row">
             <div class="col-md-6">
-              <a href="{%url update_profile%}">
+              <a href="{%url 'update_profile'%}">
                 <button class="btn btn-primary btn-sm update">Update Profile</button>
               </a>
             </div>
             <div class="col-md-6">
-              <a href="{%url new_proj%}">
+              <a href="{%url 'new_proj'%}">
                 <button class="btn btn-primary btn-sm new">Create Project</button>
               </a>
             </div>
