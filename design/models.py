@@ -48,7 +48,7 @@ class Project(models.Model):
       @classmethod
       def searcher(cls, search_term):
             search_term= str(search_term)
-            projs = cls.objects.filter(title__contains = search_term)
+            projs = Project.objects.filter(description__contains = search_term)
             return projs          
 
       def __str__(self):

@@ -3,10 +3,10 @@
 <div class="container-fluid theconts">
 
   <div class="row">
-    {% if imgs%}
+    {% if projs%}
       <h2>Found {{ imgs|length }} results{{title}}</h2>
     {% else %}
-      <h2> Found 0 imgs for the search term {{title}}</h2>
+      <h2> Found 0 projects for the search term {{title}}</h2>
     {% endif %}
     {% if message%}
       <h2>{{message}}</h2>

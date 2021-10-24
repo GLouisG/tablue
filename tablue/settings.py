@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'registration',    
     'bootstrap3',
     'bootstrap4',
-    'bootstrap5'
+    'bootstrap5',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,4 @@
-{% load bootstrap3 %} {% load static %}
+{% load bootstrap4 %} {% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>New Project</title>
+  <title>New Post</title>
   {{form.media}}
 
 {% block styles %} {% bootstrap_css %}
@@ -18,7 +18,9 @@
 
   <form  action="{%url 'new_proj'%}" method="post" enctype="multipart/form-data">
     {%csrf_token%}
-    ie="submit" class="btn btn-success btn-lg" value="Post">
+
+    {% bootstrap_form form%}
+    <input type="submit" class="btn btn-success btn-lg" value="Post">
   </form>
 
    {% block scripts %}

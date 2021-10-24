@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
 from design.models import Project, Rating
-from design.forms import NewProjForm, RateForm
+from design.forms import NewProjForm, ProfUpdateForm, RateForm
 from django.db.models.base import ObjectDoesNotExist
 # Create your views here.
 def home(request):
@@ -32,7 +32,7 @@ def new_proj(request):
         post = form.save(commit=False)
         post.owner = current_user
         post.save()
-        return redirect('profile')
+        return redirect('you')
     else:
         form = NewProjForm()
     return render(request, 'new_proj.html', {"form": form})            
@@ -41,10 +41,10 @@ def new_proj(request):
 def search(request):
     if 'project' in request.GET and request.GET["project"]:
         search_term = request.GET.get("project")
-        searched = Project.searcher(search_term)
+        projs = Project.searcher(search_term)
         title = f"For {search_term}"
 
-        return render(request, 'search.html', {"title":title, "projs":searched})
+        return render(request, 'search.html', {"title":title, "projs":projs})
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})  
@@ -52,53 +52,46 @@ def search(request):
 @login_required(login_url='/accounts/login/')
 def single(request, id):
     current_prof = request.user.profile
-    try:
-        project = Project.objects.get(id=id)
-        ratings = Rating.objects.filter(project = id)
-        design = []
-        usability = []
-        content = []
+    project = Project.objects.get(id=id)
+    ratings = Rating.objects.filter(project = id)
+    design = []
+    usability = []
+    content = []
 
-        for r in ratings:
-            design.append(r.design)
-            usability.append(r.usability)
-            content.append(r.content)
+    for r in ratings:
+        design.append(r.design)
+        usability.append(r.usability)
+        content.append(r.content)
 
-        if len(design)>0 or len(content)>0 or len(usability)>0:    
-            avg_design = sum(design)//len(design)
-            avg_usability = sum(usability)//len(usability)
-            avg_content = sum(content)//len(content)
-        else:    
-            avg_design = 0
-            avg_usability = 0
-            avg_content = 0
-
+    if len(design)>0 or len(content)>0 or len(usability)>0:    
+        avg_design = sum(design)//len(design)
+        avg_usability = sum(usability)//len(usability)
+        avg_content = sum(content)//len(content)
+    else:    
+        avg_design = 0
+        avg_usability = 0
+        avg_content = 0
 
 
 
-        if Rating.objects.filter(owner = current_prof, project = id).first() is None:
-            if request.method == "POST":
-                form = RateForm(request.POST)
-                if form.is_valid():
-                    vote = form.save(commit=False)
-                    vote.owner = current_prof
-                    vote.project = id
-                    vote.save()
-                    return redirect('profile')
-                else:
-                    form = RateForm()            
-
+    if request.method == "POST":
+        form = RateForm(request.POST)
+        if form.is_valid():
+            vote = form.save(commit=False)
+            vote.owner = current_prof
+            vote.project = project
+            vote.save()
+            return redirect('home')
+    else:
+        form = RateForm()            
+    return render(request,"project.html", {"project":project, "design": avg_design, "content": avg_content, "usability": avg_usability, "form":form, "ratings":ratings})         
             
-
-    except ObjectDoesNotExist:
-        raise Http404()
-    return render(request,"project.html", {"project":project, "design": avg_design, "content": avg_content, "usability": avg_usability, "form":form, "ratings":ratings})    
 
 @login_required(login_url='/accounts/login/')
 def update_profile(request):
     current_profile = request.user.profile
     if request.method == "POST":
-      form = NewProjForm(request.POST, request.FILES, instance=request.user.profile)
+      form = ProfUpdateForm(request.POST, request.FILES, instance=request.user.profile)
       if form.is_valid():
         image = form.cleaned_data['pic']
         bio = form.cleaned_data['bio']
@@ -107,7 +100,7 @@ def update_profile(request):
         current_profile.contacts = contacts
         current_profile.pic = image
         current_profile.save()
-        return redirect('profile')
+        return redirect('you')
     else:
-        form = NewProjForm()
+        form = ProfUpdateForm()
     return render(request, 'prof_update.html', {"form": form})     

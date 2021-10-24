@@ -1,25 +1,33 @@
 {%extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}{{block.super}}
 
- {% block content %}
-
- <div class="container-fluid theconts">
-
-   <div class="row">
-     <img src="{{project.pic.url}}"  class="img-responsive" alt="">
-   </div>
+ <div class="container-fluid theconts" style="text-align: center; background-color: rgb(94, 92, 92) !important;">
 
    <div class="row">
      <h1 class="text-center">{{project.title}}</h1>
    </div>
-
-    <h4>Details</h4>
-    <p>{{project.description}}</p>
-    
-    <p><h4>Owner:</h4>{{project.owner}}</p>
-    <p><h4>Link</h4>{{project.link}}</p>
+    <div class="row">
+      <div class="col-md-6">
+        <hr>
+        <h4>Details</h4>
+        <p>{{project.description}}</p>
+        <hr>
+        <p><h4>Owner:</h4>{{project.owner}}</p>
+        <hr>
+        <p><h4>Link</h4>{{project.link}}</p>     
+        <hr>   
+      </div>
+      <div style="text-align: center;"class="col-md-6">
+        <img style="height: 100%; width: 60%;" src="{{project.pic.url}}"  class="img-responsive" alt="">
+        
+      </div>
+    </div>
+<br>
 
     <div class="row">
-      <p>{{ratings.count}} ratings</p>
+      <p>Rated {{ratings.count}} times</p>
       <div class="col-md-4">
         <p><h4>Usability:</h4>{{usability}}</p>
       </div>
@@ -36,12 +44,15 @@
 
     <form  action="{%url 'single' project.id%}" method="post" enctype="multipart/form-data">
       {%csrf_token%}
-      ie="submit" class="btn btn-success btn-lg" value="Post">
+
+      {% bootstrap_form form%}
+      <input type="submit" class="btn btn-success btn-lg" value="Post">
     </form>
   
-    {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% bootstrap_javascript %} {% endblock %}
- </div>
-
+   </div>
+ <style>
+   hr{
+    color: aliceblue;
+   }
+ </style>
  {% endblock %}
