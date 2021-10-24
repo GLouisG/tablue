@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     'registration',    
+    'bootstrap3',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
