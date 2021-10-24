@@ -1,12 +1,12 @@
-# Delagram
-An application that acts as an Instagram clone.  
+# Tablue
+An application that acts as a site for users to upload their projects.  
   
 ## Authors and Contributors
 - Louis Gacho  
 - E-mail: louis.gacho@student.moringaschool.com  
 ## Descriptions and Details
-- An app where anyone can upload photos with captions. Made using django.   
-- It also allows a user to view images on feed and explore.    
+- An app where anyone can upload projects with descriptions links and contacts. Made using django.   
+- It also allows a user to rate other's projects on design, content and usability.      
 - Project made using Python, HTML and CSS.    
 - Frameworks used include Django.   
 - The program can be run locally by downloading all the application files from github, and running $python3 manage.py runserver.      
