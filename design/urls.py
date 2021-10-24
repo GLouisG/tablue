@@ -11,8 +11,8 @@ urlpatterns=[
     url(r'^update/profile$', views.update_profile, name='update_profile'),
     url(r'^project/(\d+)', views.single, name='single'),
     url(r'^you/', views.you, name="you"), 
-    url(r'^api/proj/$', views.ProjList.as_view()),
-    url(r'^api/prof/$', views.ProfList.as_view()),      
+    url(r'^api/proj/$', views.ProjList.as_view(),name = "apiproj" ),
+    url(r'^api/prof/$', views.ProfList.as_view(),name="apiprof" ),      
 
 ]
 
