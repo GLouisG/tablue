@@ -8,8 +8,8 @@ from design.forms import NewProjForm, ProfUpdateForm, RateForm
 from django.db.models.base import ObjectDoesNotExist
 from rest_framework.views import APIView
 
-from .models import  MoringaMerch
-from .serializer import MerchSerializer, ProjectSerializer
+from .models import  Project, Profile
+from .serializer import ProfileSerializer, ProjectSerializer
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -114,7 +114,11 @@ def update_profile(request):
 
 class ProjList(APIView):
     def get(self, request, format=None):
-        all_merch = Project.objects.all()
-        serializers = ProjectSerializer(all_merch, many=True)
+        all_projs = Project.objects.all()
+        serializers = ProjectSerializer(all_projs, many=True)
         return Response(serializers.data) 
-           
+class ProfList(APIView):
+    def get(self, request, format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many=True)
+        return Response(serializers.data)     
