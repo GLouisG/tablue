@@ -6,6 +6,13 @@ from django.contrib.auth.decorators import login_required
 from design.models import Project, Rating
 from design.forms import NewProjForm, ProfUpdateForm, RateForm
 from django.db.models.base import ObjectDoesNotExist
+from rest_framework.views import APIView
+
+from .models import  MoringaMerch
+from .serializer import MerchSerializer, ProjectSerializer
+from rest_framework import status
+from rest_framework.response import Response
+
 # Create your views here.
 def home(request):
     projects = Project.objects.all()
@@ -104,3 +111,10 @@ def update_profile(request):
     else:
         form = ProfUpdateForm()
     return render(request, 'prof_update.html', {"form": form})     
+
+class ProjList(APIView):
+    def get(self, request, format=None):
+        all_merch = Project.objects.all()
+        serializers = ProjectSerializer(all_merch, many=True)
+        return Response(serializers.data) 
+           
