@@ -1,1 +1,28 @@
-<h2>{{val}}</h2>
+<div class="container-fluid">
+  <div class="theprojects">
+    {%for item in projs%}
+    <div class="pcard card" style="width: 60%;">
+    
+      <div class="card-header" >
+        <div class="image-holder">
+          <a href="{%url 'single' item.id%}">
+            <img class="image" src="{{item.image.url}}" alt="">
+          </a>
+        </div>
+      </div>
+      <hr>
+    
+      <div class="card-body">
+        <a href="{%url 'single' item.id%}">
+          <h4>{{item.title}}</h4>
+        </a>
+        <hr>        
+        <p class="text-muted">{{item.owner}}</p>
+      </div>
+      <hr>
+      <br>
+    </div>
+    <br><br><br>
+    {%endfor%} 
+  </div>
+</div>
