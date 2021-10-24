@@ -1,0 +1,46 @@
+{%extends 'base.html'%} 
+{% block content %}
+<div class="container-fluid theconts">
+
+  <div class="row">
+    {% if imgs%}
+      <h2>Found {{ imgs|length }} results{{title}}</h2>
+    {% else %}
+      <h2> Found 0 imgs for the search term {{title}}</h2>
+    {% endif %}
+    {% if message%}
+      <h2>{{message}}</h2>
+    {%endif%}
+
+  </div>
+
+  <!-- <div class="row "> -->
+
+  {% if projs %}
+  <div class="theprojects">
+    {%for item in projs%}
+    <div class="pcard card" style="width: 60%;">
+    
+      <div class="card-header" >
+        <div class="image-holder">
+          <img class="image" src="{{item.image.url}}" alt="">
+        </div>
+      </div>
+      <hr>
+    
+      <div class="card-body">
+        <h4>{{item.title}}</h4>
+        <hr>        
+        <p class="text-muted">{{item.owner}}</p>
+      </div>
+      <hr>
+      <br>
+    </div>
+    <br><br><br>
+    {%endfor%} 
+  </div>
+
+  {% endif %}
+  <!-- </div> -->
+</div>
+{% endblock %}
