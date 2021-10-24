@@ -25,7 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'', include('design.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),  
-    url(r'^logout/$', views.LogoutView.as_view(), {"next_page": '/'}),
-    url(r'^api/proj/$', views.ProjList.as_view()),
-    url(r'^api/prof/$', views.ProfList.as_view()),                
+    url(r'^logout/$', views.LogoutView.as_view(), {"next_page": '/'}),              
 ]
