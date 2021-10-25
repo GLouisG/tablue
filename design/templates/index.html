@@ -2,9 +2,11 @@
 {%block content%}{{block.super}}
 
 <div class="container-fluid">
+  <br>
   <div class="theprojects">
     {%for item in projs%}
-    <div class="pcard card" style="width: 30%; height: 90%;">
+
+    <div class="pcard card" style="width: 360px; height: 365px;">
     
       <div class="card-header" >
         <div class="image-holder">
@@ -28,7 +30,7 @@
       <hr>
       <br>
     </div>
-    <br><br><br>
+    <!-- <br><br><br> -->
     {%endfor%} 
   </div>
 </div>
@@ -115,7 +117,7 @@
       display: grid;
       grid-template-columns: auto auto auto;
       margin: 0 auto;
-      margin-left: 8%;
+      margin-left: 2%;
 
   }
 </style>
