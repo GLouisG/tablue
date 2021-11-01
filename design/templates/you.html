@@ -71,7 +71,7 @@
     {%endfor%} 
   </div>
 </div>
-<style>
+<!-- <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
   body{
     height: 100vh;
@@ -151,7 +151,104 @@
       margin-left: 8%;
 
   }
+</style> -->
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+  *{
+    margin: 0px;
+    padding: 0%;
+  }
+  .contbody{
+      height: 100%;
+      width: 100%; 
+      background-color:#5a5a5a;
+  }
+  .container-fluid{
+      background-color:#5a5a5a;
+      font-family: "Poppins", sans-serif;
+      font-weight: 300;
+      height: 100%;
+      width: 100%;
+
+      display:block;
+      top:0px; 
+
+      left:0px; 
+      z-index:-1;
+
+  }
+
+
+
+  .prof-card{
+      width: 380px;
+      border: none;
+      border-radius: 15px;
+      padding: 8px;
+      /* background-color: #000080; */
+      color: rgb(0, 0, 0);
+      position: relative;
+      height: 370px
+  }
+
+  .pcard{
+      width: 380px;   
+      background-color: #000080;
+      color: white;
+      height: 370px  
+
+  }
+
+  .upper {
+      height: 100px
+  }
+
+  .upper img {
+      width: 100%;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px
+  }
+
+  .user {
+      position: relative
+  }
+
+  .profile img {
+      height: 80px;
+      width: 80px;
+      margin-top: 2px
+  }
+
+  .profile {
+      position: absolute;
+      top: -50px;
+      left: 38%;
+      height: 90px;
+      width: 90px;
+      border: 3px solid #fff;
+      border-radius: 50%
+  }
+
+  .follow {
+      border-radius: 15px;
+      padding-left: 20px;
+      padding-right: 20px;
+      height: 35px
+  }
+
+  .stats span {
+      font-size: 29px
+  }
+  .theprojects{
+      display: grid;
+      grid-template-columns: auto auto auto;
+      margin: 0 auto;
+      margin-left: 2%;
+
+  }
 </style>
+
 {%endblock%}
 
 
